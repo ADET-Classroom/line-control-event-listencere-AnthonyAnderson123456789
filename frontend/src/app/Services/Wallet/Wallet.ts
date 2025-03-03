@@ -1,6 +1,6 @@
 import { ethers } from "ethers"
 //Modify this to your contract 
-import lock from "../../artifacts/contracts/Lock.sol/Lock.json"
+import lock from "../../artifacts/contracts/LineControl.sol/LineControl.json"
 
 export enum WalletConnectionStatus{
     waiting, success, missingWallet, declined
@@ -29,5 +29,15 @@ export class WalletConnection {
             //No Wallet installed 
             return WalletConnectionStatus.missingWallet
         }
+    }
+
+
+    async sendStudents(students:string[], studentsSent:()=>void){
+        await this.contract?.sendStudents(students);
+        studentsSent();
+    }
+
+    async finalizeAStudent(studentName:string){
+        await this.contract?.finalize(studentName);
     }
 }

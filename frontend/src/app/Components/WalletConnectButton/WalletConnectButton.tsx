@@ -1,5 +1,7 @@
 import { WalletConnection, WalletConnectionStatus } from "@/app/Services";
 import { useState } from "react";
+import { FinalizeStudents } from "../Admissions/FinalizeStudents";
+import { SendStudents } from "../Instructor/SendStudents";
 
 let wallet = new WalletConnection();
 //test
@@ -25,7 +27,10 @@ export function WalletConnectionButton(){
 
     if(status == WalletConnectionStatus.success){
         return (
-            <div>Connected</div>
+            <div>
+                <FinalizeStudents wallet={wallet} />
+                <SendStudents wallet={wallet} />
+            </div>
         )
     }
 
